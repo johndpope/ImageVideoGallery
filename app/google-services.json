@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "134234160305",
+    "firebase_url": "https://imagevideogallery-ccccd.firebaseio.com",
+    "project_id": "imagevideogallery-ccccd",
+    "storage_bucket": "imagevideogallery-ccccd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134234160305:android:5098671baa540a05",
+        "android_client_info": {
+          "package_name": "com.deepesh.imagevideogallery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134234160305-f2sln08prr29s808fjhqr2e5gtbvkvct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deepesh.imagevideogallery",
+            "certificate_hash": "0b51873408fefba4eec4777c99f366dc1b960c90"
+          }
+        },
+        {
+          "client_id": "134234160305-n5t8q5605tac3p7faq70lr3fhartkesv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq2fUjkYOND2q6YZGnbZ18zM-107gLGg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134234160305-n5t8q5605tac3p7faq70lr3fhartkesv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
