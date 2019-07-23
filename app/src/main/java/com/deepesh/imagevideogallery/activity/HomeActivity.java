@@ -51,12 +51,22 @@ public class HomeActivity extends AppCompatActivity
         recyclerView=findViewById(R.id.recycler_view);
         dataList=new ArrayList<>();
         datasrchlist=new ArrayList<>();
+
+        prepareData();
+
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(HomeActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 data=dataList.get(position);
                 pos=position;
-                showOption();
+                //showOption();
+
+                Intent intent=new Intent(HomeActivity.this,FileDetails.class);
+                intent.putExtra("imgloc",data.getThumbnamil());
+                intent.putExtra("imgname",data.getName());
+                intent.putExtra("imgprice",data.getPrice());
+                intent.putExtra("imgcat",data.getHashtag());
+                startActivity(intent);
             }
 
             @Override
@@ -66,8 +76,6 @@ public class HomeActivity extends AppCompatActivity
         }));
 
         manager = new LinearLayoutManager(getApplicationContext());
-
-        prepareData();
 
         datasrchlist.addAll(dataList);
         adapter=new RecyclerViewAdapter(HomeActivity.this,R.layout.list_item, dataList);
@@ -197,7 +205,8 @@ public class HomeActivity extends AppCompatActivity
     }
 
     void showOption() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+
+        //AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         /*final String[] items = {"Buy item", "Add to cart", "Details"};
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -215,19 +224,22 @@ public class HomeActivity extends AppCompatActivity
                 }
             }
         });*/
-        builder.setTitle("Do you want to buy..?").setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(HomeActivity.this, "Thannk-you", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(HomeActivity.this, "Try Another", Toast.LENGTH_SHORT).show();
-                    }
-                }).create().show();
+
+
+//        builder.setTitle("Do you want to buy..?").setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(HomeActivity.this, "Thannk-you", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(HomeActivity.this, "Try Another", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).create().show();
+
         //dialog.show();
     }
 

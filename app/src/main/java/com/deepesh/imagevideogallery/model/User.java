@@ -1,25 +1,23 @@
 package com.deepesh.imagevideogallery.model;
 
 public class User {
-    String name;
-    String email;
-    String mob;
-    String pass;
-    String imageurl;
-    String token;
-    String uid;
+    private String name;
+    private String email;
+    private String mob;
+    private String pass;
+    private String imageurl;
+    private String token;
 
     public User() {
     }
 
-    public User(String name, String email, String mob, String pass, String imageurl, String token, String uid) {
+    public User(String name, String email, String mob, String pass, String imageurl, String token) {
         this.name = name;
         this.email = email;
         this.mob = mob;
         this.pass = pass;
         this.imageurl = imageurl;
         this.token = token;
-        this.uid = uid;
     }
 
     public String getName() {
@@ -70,14 +68,6 @@ public class User {
         this.token = token;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -87,7 +77,6 @@ public class User {
                 ", pass='" + pass + '\'' +
                 ", imageurl='" + imageurl + '\'' +
                 ", token='" + token + '\'' +
-                ", uid='" + uid + '\'' +
                 '}';
     }
 }
