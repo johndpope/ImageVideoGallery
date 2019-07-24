@@ -18,8 +18,13 @@
         app:cardCornerRadius="5px"
         android:layout_margin="2px">
 
-        <android.support.v7.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <VideoView
+            android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

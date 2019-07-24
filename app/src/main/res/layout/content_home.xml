@@ -25,6 +25,7 @@
             android:drawableRight="@android:drawable/ic_menu_search"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:padding="5dp"
             android:hint="@string/search_text"/>
 
     </android.support.v7.widget.CardView>

@@ -5,19 +5,12 @@ package com.deepesh.imagevideogallery.model;
  */
 
 public class Util {
-    public static final String URI="https://asymmetrical-steril.000webhostapp.com/Teachers/";
-    public static final String REGISTER_ENDPOINT = URI+"insert.php";
-    public static final String LOGIN_ENDPOINT = URI+"login.php";
-    public static final String RETRIEVE_ENDPOINT = URI+"retrieve.php";
-    public static final String TUPDATE1_ENDPOINT = URI+"tupdate1.php";
-    public static final String SEARCH_ENDPOINT = URI+"tsearch.php";
-    public static final String DELETE_ENDPOINT = URI+"deleteuser.php";
-    public static final String UPDATE_ENDPOINT = URI+"updateuser.php";
 
-    public static final String PREFS_NAME = "finalproject";
-    public static final String KEY_LOGREG = "keyLoginRegister";
-    public static final String KEY_LOG = "keyLogin";
-    public static final String KEY_ST = "studentorteacher";
+    public static final String IMAGE_VIEW = "Images";
+    public static final String VIDEO_VIEW = "Videos";
+    public static final String USER_EMAIL = "deepeshkumar2580@gmail.com";
+    public static final String USER_PASS = "12345";
+
     public static final String KEY_STD = "student";
     public static final String KEY_THR = "teacher";
     public static final String KEY_T$S = "youare";

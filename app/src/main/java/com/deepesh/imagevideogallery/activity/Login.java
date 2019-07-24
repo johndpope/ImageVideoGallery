@@ -123,9 +123,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                        Toast.makeText(Login.this, user.toString(), Toast.LENGTH_SHORT).show();
 //                        Log.d("shs",user.toString());
 //                        dref.child("AdminUser").child(fuser.getUid()).setValue(user);
-//                        Intent intent=new Intent(Login.this, HomeActivity.class);
-//                        intent.putExtra("intent_user",user.toString());
-//                        startActivity(intent);
+                        Intent intent=new Intent(Login.this, HomeActivity.class);
+                        intent.putExtra("intent_user",user.toString());
+                        startActivity(intent);
 
 
                         Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();

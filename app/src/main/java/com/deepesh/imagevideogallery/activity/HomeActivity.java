@@ -3,6 +3,7 @@ package com.deepesh.imagevideogallery.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -25,10 +26,24 @@ import android.widget.ViewFlipper;
 
 import com.deepesh.imagevideogallery.R;
 import com.deepesh.imagevideogallery.adapter.RecyclerViewAdapter;
+import com.deepesh.imagevideogallery.model.Details;
 import com.deepesh.imagevideogallery.model.MyData;
 import com.deepesh.imagevideogallery.model.RecyclerItemClickListener;
+import com.deepesh.imagevideogallery.model.Util;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
@@ -36,11 +51,25 @@ public class HomeActivity extends AppCompatActivity
 
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
-    ArrayList<MyData> dataList,datasrchlist;
+    //ArrayList<MyData> dataList,datasrchlist;
+    ArrayList<Details> dataList,datasrchlist;;
     LinearLayoutManager manager;
     MyData data;
+    Details details;
     int pos;
     EditText srchtxt;
+
+    List<HashMap<String,String>> fileList;
+
+    FirebaseAuth fauth;
+
+    String FILE_TYPE="fhhfjdk";
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = fauth.getCurrentUser();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +78,35 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView=findViewById(R.id.recycler_view);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            FILE_TYPE = extras.getString("FILE_TYPE");
+        }
+
         dataList=new ArrayList<>();
         datasrchlist=new ArrayList<>();
 
-        prepareData();
+        fauth=FirebaseAuth.getInstance();
+        //prepareData();
+        retrieveData();
+
+        Toast.makeText(HomeActivity.this, "FILE_TYPE = "+FILE_TYPE, Toast.LENGTH_SHORT).show();
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(HomeActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                data=dataList.get(position);
+                //deta=dataList.get(position);
+                details=dataList.get(position);
                 pos=position;
                 //showOption();
 
                 Intent intent=new Intent(HomeActivity.this,FileDetails.class);
-                intent.putExtra("imgloc",data.getThumbnamil());
-                intent.putExtra("imgname",data.getName());
-                intent.putExtra("imgprice",data.getPrice());
-                intent.putExtra("imgcat",data.getHashtag());
+                intent.putExtra("imgloc",details.getUrl());
+                intent.putExtra("imgname",details.getName());
+                intent.putExtra("imgprice",details.getPrice());
+                intent.putExtra("imgcat",details.getCat());
+                intent.putExtra("FILE_TYPE",FILE_TYPE);
                 startActivity(intent);
             }
 
@@ -81,6 +122,8 @@ public class HomeActivity extends AppCompatActivity
         adapter=new RecyclerViewAdapter(HomeActivity.this,R.layout.list_item, dataList);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+
+
 
         srchtxt=findViewById(R.id.eTxtSearch);
         srchtxt.addTextChangedListener(new TextWatcher() {
@@ -124,8 +167,55 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
+    private void retrieveData(){
 
-    private void prepareData(){
+
+        fauth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                String FOLDER_NAME="";
+                if (FILE_TYPE.equalsIgnoreCase("images")){
+                    FOLDER_NAME=Util.IMAGE_VIEW;
+                }else if (FILE_TYPE.equalsIgnoreCase("videos")){
+                    FOLDER_NAME=Util.VIDEO_VIEW;
+                }else {
+                    FOLDER_NAME=Util.IMAGE_VIEW;
+                }
+
+
+                DatabaseReference dref=FirebaseDatabase.getInstance().getReference();
+                dref.child(FOLDER_NAME).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //fileList=new ArrayList<>();
+                        if (dataSnapshot.exists()){
+                            for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                                Details details=snapshot.getValue(Details.class);
+                                String imagename=details.getName();
+                                String imagecat=details.getCat();
+                                String imagepriice=details.getPrice();
+                                String imageurl=details.getUrl();
+
+                                Details details1=new Details(imagename,imageurl,imagecat,imagepriice);
+                                dataList.add(details1);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    /*private void prepareData(){
         MyData data1=new MyData("img1","#Design1",R.drawable.a,1001);
         dataList.add(data1);
         MyData data2=new MyData("img2","#Design2",R.drawable.b,1002);
@@ -202,7 +292,7 @@ public class HomeActivity extends AppCompatActivity
         MyData data39=new MyData("img9","#Design19",R.drawable.f,1009);
         dataList.add(data39);
 
-    }
+    }*/
 
     void showOption() {
 
@@ -250,8 +340,8 @@ public class HomeActivity extends AppCompatActivity
         if (text.length()==0){
             dataList.addAll(datasrchlist);
         }else {
-            for (MyData d:datasrchlist){
-                if (d.getHashtag().toLowerCase(Locale.getDefault()).contains(text)){
+            for (Details d:datasrchlist){
+                if (d.getCat().toLowerCase(Locale.getDefault()).contains(text)){
                     dataList.add(d);
                 }
             }
@@ -303,9 +393,15 @@ public class HomeActivity extends AppCompatActivity
             Intent intent=new Intent(getApplicationContext(),FileUpload.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent=new Intent(HomeActivity.this,HomeActivity.class);
+            FILE_TYPE=Util.IMAGE_VIEW;
+            intent.putExtra("FILE_TYPE",FILE_TYPE);
+            startActivity(intent);
         } else if (id == R.id.nav_video) {
-
+            Intent intent=new Intent(HomeActivity.this,HomeActivity.class);
+            FILE_TYPE=Util.VIDEO_VIEW;
+            intent.putExtra("FILE_TYPE",FILE_TYPE);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_login) {

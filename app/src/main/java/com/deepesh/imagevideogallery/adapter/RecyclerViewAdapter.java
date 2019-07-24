@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.deepesh.imagevideogallery.R;
+import com.deepesh.imagevideogallery.model.Details;
 import com.deepesh.imagevideogallery.model.MyData;
 
 import java.util.ArrayList;
@@ -26,10 +27,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     Context context;
     int resource;
-    ArrayList<MyData> list;
+    //ArrayList<MyData> list;
+    ArrayList<Details> list;
 
     int lastPosition=-1;
-    public RecyclerViewAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<MyData> list) {
+
+    public RecyclerViewAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Details> list) {
 
         this.context = context;
         this.resource = resource;
@@ -47,9 +50,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        MyData data=list.get(position);
-        holder.txtname.setText(data.getName()+"   "+data.getHashtag()+"  "+data.getPrice());
-        Glide.with(context).load(data.getThumbnamil()).into(holder.thumbnail);
+        //MyData data=list.get(position);
+        Details details=list.get(position);
+        holder.txtname.setText(details.getName()+"   "+details.getPrice());
+        Glide.with(context).load(details.getUrl()).into(holder.thumbnail);
 
         if(position >lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context,
