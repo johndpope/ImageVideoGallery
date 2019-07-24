@@ -157,12 +157,14 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
                 ){
                 type.setText("video");
             imageorvideoFolderName="Videos";
+        }else {
+
         }
         if (FilePathUri != null) {
             progressDialog.setMessage("Uploading...");
             progressDialog.show();
 
-            Toast.makeText(getApplicationContext(), "Fille Extension "+GetFileExtension(FilePathUri), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Fille Extension "+GetFileExtension(FilePathUri), Toast.LENGTH_LONG).show();
             StorageReference storageReference2nd = sref.child(imageorvideoFolderName).child(type.getText().toString().trim()+ System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
 
             // Adding addOnSuccessListener to second StorageReference.

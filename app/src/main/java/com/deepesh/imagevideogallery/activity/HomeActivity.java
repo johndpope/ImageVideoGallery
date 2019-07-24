@@ -1,5 +1,6 @@
 package com.deepesh.imagevideogallery.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ public class HomeActivity extends AppCompatActivity
 
     String FILE_TYPE="fhhfjdk";
 
+    ProgressDialog progressDialog;
     @Override
     protected void onStart() {
         super.onStart();
@@ -77,6 +79,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        progressDialog=new ProgressDialog(HomeActivity.this);
         recyclerView=findViewById(R.id.recycler_view);
 
         Bundle extras = getIntent().getExtras();
@@ -91,7 +94,7 @@ public class HomeActivity extends AppCompatActivity
         //prepareData();
         retrieveData();
 
-        Toast.makeText(HomeActivity.this, "FILE_TYPE = "+FILE_TYPE, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(HomeActivity.this, "FILE_TYPE = "+FILE_TYPE, Toast.LENGTH_SHORT).show();
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(HomeActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -169,7 +172,8 @@ public class HomeActivity extends AppCompatActivity
 
     private void retrieveData(){
 
-
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         fauth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -202,11 +206,12 @@ public class HomeActivity extends AppCompatActivity
                             }
 
                         }
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        progressDialog.dismiss();
                     }
                 });
             }

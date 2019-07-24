@@ -55,7 +55,7 @@ public class FileDetails extends AppCompatActivity {
             imageprice=extras.getString("imgprice");
             FILE_TYPE=extras.getString("FILE_TYPE");
         }
-        Toast.makeText(FileDetails.this, "File_Type : "+FILE_TYPE, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(FileDetails.this, "File_Type : "+FILE_TYPE, Toast.LENGTH_SHORT).show();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
