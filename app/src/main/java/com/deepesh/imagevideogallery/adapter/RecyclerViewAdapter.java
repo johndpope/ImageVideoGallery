@@ -27,7 +27,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     Context context;
     int resource;
-    //ArrayList<MyData> list;
     ArrayList<Details> list;
 
     int lastPosition=-1;
@@ -50,7 +49,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        //MyData data=list.get(position);
         Details details=list.get(position);
         holder.txtname.setText(details.getName()+"   "+details.getPrice());
         Glide.with(context).load(details.getUrl()).into(holder.thumbnail);

@@ -52,7 +52,6 @@ public class HomeActivity extends AppCompatActivity
 
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
-    //ArrayList<MyData> dataList,datasrchlist;
     ArrayList<Details> dataList,datasrchlist;;
     LinearLayoutManager manager;
     MyData data;
@@ -121,7 +120,7 @@ public class HomeActivity extends AppCompatActivity
 
         manager = new LinearLayoutManager(getApplicationContext());
 
-        datasrchlist.addAll(dataList);
+        //datasrchlist.addAll(dataList);
         adapter=new RecyclerViewAdapter(HomeActivity.this,R.layout.list_item, dataList);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -206,6 +205,7 @@ public class HomeActivity extends AppCompatActivity
                             }
 
                         }
+                        datasrchlist.addAll(dataList);
                         progressDialog.dismiss();
                     }
 
@@ -218,124 +218,6 @@ public class HomeActivity extends AppCompatActivity
         });
 
 
-    }
-
-    /*private void prepareData(){
-        MyData data1=new MyData("img1","#Design1",R.drawable.a,1001);
-        dataList.add(data1);
-        MyData data2=new MyData("img2","#Design2",R.drawable.b,1002);
-        dataList.add(data2);
-        MyData data3=new MyData("img3","#Design3",R.drawable.c,1003);
-        dataList.add(data3);
-        MyData data4=new MyData("img4","#Design14",R.drawable.e,1004);
-        dataList.add(data4);
-        MyData data5=new MyData("img5","#Design15",R.drawable.f,1005);
-        dataList.add(data5);
-        MyData data6=new MyData("img6","#Design16",R.drawable.g,1006);
-        dataList.add(data6);
-        MyData data7=new MyData("img7","#Design17",R.drawable.h,1007);
-        dataList.add(data7);
-        MyData data8=new MyData("img8","#Design18",R.drawable.c,1008);
-        dataList.add(data8);
-        MyData data9=new MyData("img9","#Design19",R.drawable.f,1009);
-        dataList.add(data9);
-
-        MyData data10=new MyData("img1","#Design1",R.drawable.a,1001);
-        dataList.add(data10);
-        MyData data11=new MyData("img2","#Design2",R.drawable.b,1002);
-        dataList.add(data11);
-        MyData data12=new MyData("img3","#Design3",R.drawable.c,1003);
-        dataList.add(data12);
-        MyData data13=new MyData("img4","#Design14",R.drawable.e,1004);
-        dataList.add(data13);
-        MyData data15=new MyData("img5","#Design15",R.drawable.f,1005);
-        dataList.add(data15);
-        MyData data16=new MyData("img6","#Design16",R.drawable.g,1006);
-        dataList.add(data16);
-        MyData data17=new MyData("img7","#Design17",R.drawable.h,1007);
-        dataList.add(data17);
-        MyData data18=new MyData("img8","#Design18",R.drawable.c,1008);
-        dataList.add(data18);
-        MyData data19=new MyData("img9","#Design19",R.drawable.f,1009);
-        dataList.add(data19);
-
-        MyData data21=new MyData("img1","#Design1",R.drawable.a,1001);
-        dataList.add(data21);
-        MyData data22=new MyData("img2","#Design2",R.drawable.b,1002);
-        dataList.add(data22);
-        MyData data23=new MyData("img3","#Design3",R.drawable.c,1003);
-        dataList.add(data23);
-        MyData data24=new MyData("img4","#Design14",R.drawable.e,1004);
-        dataList.add(data24);
-        MyData data25=new MyData("img5","#Design15",R.drawable.f,1005);
-        dataList.add(data25);
-        MyData data26=new MyData("img6","#Design16",R.drawable.g,1006);
-        dataList.add(data26);
-        MyData data27=new MyData("img7","#Design17",R.drawable.h,1007);
-        dataList.add(data27);
-        MyData data28=new MyData("img8","#Design18",R.drawable.c,1008);
-        dataList.add(data28);
-        MyData data29=new MyData("img9","#Design19",R.drawable.f,1009);
-        dataList.add(data29);
-
-        MyData data31=new MyData("img1","#Design1",R.drawable.a,1001);
-        dataList.add(data31);
-        MyData data32=new MyData("img2","#Design2",R.drawable.b,1002);
-        dataList.add(data32);
-        MyData data33=new MyData("img3","#Design3",R.drawable.c,1003);
-        dataList.add(data33);
-        MyData data34=new MyData("img4","#Design14",R.drawable.e,1004);
-        dataList.add(data34);
-        MyData data35=new MyData("img5","#Design15",R.drawable.f,1005);
-        dataList.add(data35);
-        MyData data36=new MyData("img6","#Design16",R.drawable.g,1006);
-        dataList.add(data36);
-        MyData data37=new MyData("img7","#Design17",R.drawable.h,1007);
-        dataList.add(data37);
-        MyData data38=new MyData("img8","#Design18",R.drawable.c,1008);
-        dataList.add(data38);
-        MyData data39=new MyData("img9","#Design19",R.drawable.f,1009);
-        dataList.add(data39);
-
-    }*/
-
-    void showOption() {
-
-        //AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-        /*final String[] items = {"Buy item", "Add to cart", "Details"};
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
-
-                        break;
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                }
-            }
-        });*/
-
-
-//        builder.setTitle("Do you want to buy..?").setCancelable(false)
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(HomeActivity.this, "Thannk-you", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(HomeActivity.this, "Try Another", Toast.LENGTH_SHORT).show();
-//                    }
-//                }).create().show();
-
-        //dialog.show();
     }
 
 
@@ -355,7 +237,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    //-------------------------------------------------------------------------
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -391,7 +272,6 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_upload) {
@@ -420,5 +300,4 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //-------------------------------------------------------------------------
 }

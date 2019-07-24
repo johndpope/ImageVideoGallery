@@ -107,8 +107,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-//                        email=user_email.getText().toString().trim();
-//                        pass=user_pass.getText().toString().trim();
+                        email=user_email.getText().toString().trim();
+                        pass=user_pass.getText().toString().trim();
 //                        String name="Deepesh Kumar";
 //                        String mob="9803475225";
 //                        String email="deepeshkumar2580@gmail.com";
@@ -124,7 +124,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                        Log.d("shs",user.toString());
 //                        dref.child("AdminUser").child(fuser.getUid()).setValue(user);
                         Intent intent=new Intent(Login.this, HomeActivity.class);
-                        intent.putExtra("intent_user",user.toString());
+                        //intent.putExtra("intent_user",user.toString());
                         startActivity(intent);
 
 
@@ -187,12 +187,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-//        if (id==R.id.btn_login){
-//            Toast.makeText(Login.this, "Login Clicked", Toast.LENGTH_LONG).show();
-//            loginUser();
-//
-//        }else {
-//
-//        }
     }
 }

@@ -114,10 +114,7 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
             FilePathUri = data.getData();
 
             try {
-                // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
-
-                // After selecting image change choose button above text.
                 btnImageChoose.setText("File Selected...!");
 
             }
@@ -134,12 +131,10 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
 
-        // Returning the file Extension.
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
 
     }
     public void UploadImageFileToFirebaseStorage() {
-        // Checking whether FilePathUri Is empty or not.
         String imageorvideoFolderName="";
         if (GetFileExtension(FilePathUri).equalsIgnoreCase("jpg")
                 ||GetFileExtension(FilePathUri).equalsIgnoreCase("jpeg")
@@ -167,17 +162,13 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
             //Toast.makeText(getApplicationContext(), "Fille Extension "+GetFileExtension(FilePathUri), Toast.LENGTH_LONG).show();
             StorageReference storageReference2nd = sref.child(imageorvideoFolderName).child(type.getText().toString().trim()+ System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
 
-            // Adding addOnSuccessListener to second StorageReference.
-
             storageReference2nd.putFile(FilePathUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                             progressDialog.dismiss();
-                            //Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
 
-                            // Getting image upload ID.
                             Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                             task.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
@@ -188,25 +179,20 @@ public class FileUpload extends AppCompatActivity implements View.OnClickListene
 
                         }
                     })
-                    //If something goes wrong.
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
 
-                            // Hiding the progressDialog.
                             progressDialog.dismiss();
 
-                            // Showing exception erro message.
                             Toast.makeText(FileUpload.this, exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     })
 
-                    // On progress change upload time.
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            // Setting progressDialog Title.
                             progressDialog.setMessage("Uploading...");
 
                         }
